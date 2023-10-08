@@ -3,7 +3,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
+    width: 100%;
 }
 .header-class{
     font-size: 30px;
@@ -16,15 +17,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 400px;
-    height: 400px;
+    width: 30em;
+    height: 30em;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 .img-class{
-    width: 100px;
-    height: 100px;
+    width: 10em;
+    height: 10em;
     margin-bottom: 20px;
 }
 .button-submit{
