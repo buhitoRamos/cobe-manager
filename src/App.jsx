@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useCallback, useMemo} from 'react'
 import Login from "./pages/login";
 
 import {
@@ -7,12 +7,32 @@ import {
   Route
 } from 'react-router-dom'
 
-function App() {
+const App=() => {
+  const [user, setUser] = useState({})
+
+  const onSetUser = useCallback( (userData)=> {
+    setUser(user => ( {...user, ...userData}) )
+
+},[setUser])
+
+  const data =  useMemo(()=> (
+    {
+        user
+    }
+  ), [user])
+
+  const actions = useMemo(()=> (
+  {
+      onSetUser
+  }
+  ), [onSetUser])
+
+
   return (
     <Router>
     <Switch>
         <Route exact path="/">
-           <Login />
+           <Login data={data} actions={actions}/>
         </Route>
     </Switch>
 </Router>
