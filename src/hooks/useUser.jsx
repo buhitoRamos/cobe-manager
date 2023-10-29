@@ -1,27 +1,31 @@
-import {  useEffect } from 'react'
-import axios from 'axios'
-import {localHost} from '../utils/helpers'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { localHost } from '../utils/helpers';
 
-const useUser = (user, setUser) => {
+const useUser = () => {
+  const [userData, setUserData] = useState(null);
 
-   
-        const getUser = async () => {
-            debugger
-          const url = `${localHost}/db`
-          try {
-            const { data } = await axios.get(url)
-            const userFound = data
-            console.log(userFound)
-            if (userFound) {
-              setUser(userFound)
-            }
-          } catch (error) {
-            console.log(error)
-          }
-        }
-        
-    
-        getUser();
-  
-}
+  const getUser = async () => {
+    try {
+      const url = `${localHost}/db`;
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getUser();
+      setUserData(result);
+    };
+
+    fetchData();
+  }, []);
+
+  return userData;
+};
+
 export default useUser;

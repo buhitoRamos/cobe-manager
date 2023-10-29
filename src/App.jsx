@@ -1,5 +1,10 @@
-import React, {useState, useCallback, useMemo} from 'react'
-import Login from "./pages/login";
+import React from 'react'
+import Login from "./pages/login/Login";
+import MainPage from './pages/mainPage/MainPage';
+import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
+import rootReducer from './utils/reducers'; 
+
 
 import {
   BrowserRouter as Router,
@@ -7,35 +12,22 @@ import {
   Route
 } from 'react-router-dom'
 
+
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 const App=() => {
-  const [user, setUser] = useState({})
-
-  const onSetUser = useCallback( (userData)=> {
-    setUser(user => ( {...user, ...userData}) )
-
-},[setUser])
-
-  const data =  useMemo(()=> (
-    {
-        user
-    }
-  ), [user])
-
-  const actions = useMemo(()=> (
-  {
-      onSetUser
-  }
-  ), [onSetUser])
-
-
   return (
     <Router>
-    <Switch>
-        <Route exact path="/">
-           <Login data={data} actions={actions}/>
-        </Route>
-    </Switch>
-</Router>
+      <Provider store={store}>
+        <Switch>
+          <Route exact path="/">
+            <Login />
+          </Route>
+          <Route path="/main">
+            <MainPage />
+          </Route>
+        </Switch>
+      </Provider>
+    </Router>
   );
 }
 
