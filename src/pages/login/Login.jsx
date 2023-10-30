@@ -18,7 +18,7 @@ const history = useHistory()
       .then((response) => {
         dispatch({ type: 'LOGIN', payload: response });
         history.push(`/main`)
-
+       
       })
       .catch((error) => {
         customAlert({ text: error.message })
