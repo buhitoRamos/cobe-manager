@@ -3,6 +3,7 @@ import guitarra from "../../img/guitarra.svg";
 import { loginUser } from "../../utils/loginUser";
 import { useDispatch } from "react-redux";
 import { customAlert } from "../../components/CustomAlert";
+import { useHistory } from 'react-router-dom'
 import "./login.css";
 
 
@@ -10,12 +11,13 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState(""); 
 const dispatch = useDispatch();
-
+const history = useHistory()
 
   const _handleClick = () => {
     loginUser(username, password)
       .then((response) => {
         dispatch({ type: 'LOGIN', payload: response });
+        history.push(`/main`)
 
       })
       .catch((error) => {

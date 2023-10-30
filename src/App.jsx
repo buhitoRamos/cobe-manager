@@ -19,7 +19,7 @@ const App=() => {
     <Router>
       <Provider store={store}>
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/login">
             <Login />
           </Route>
           <Route path="/main">
